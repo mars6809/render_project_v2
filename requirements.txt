@@ -1,5 +1,6 @@
 flask
-pandas
+flask-session
+openai
 ta
 matplotlib
 apscheduler
