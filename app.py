@@ -1,13 +1,26 @@
 from flask import Flask, render_template
 import pandas as pd
 import os
+from apscheduler.schedulers.background import BackgroundScheduler
+import subprocess
+import datetime
 
 app = Flask(__name__)
+
+# 執行回測的函式
+def run_backtest():
+    print("Running backtest:", datetime.datetime.now())
+    subprocess.run(["python", "param_compare.py"])
+
+# 排程器，每5分鐘自動執行一次回測
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=run_backtest, trigger="interval", minutes=5)
+scheduler.start()
 
 @app.route("/")
 def index():
     if not os.path.exists("param_compare_results.csv"):
-        return "還沒有資料，請稍後再試。"
+        return "還沒有資料，系統正在更新，請稍後再試。"
 
     df = pd.read_csv("param_compare_results.csv")
     best_df = pd.read_csv("best_strategies.csv") if os.path.exists("best_strategies.csv") else pd.DataFrame()
@@ -17,8 +30,6 @@ def index():
 
     return render_template("index.html", table_all=table_all, table_best=table_best)
 
-import os
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host="0.0.0.0", port=port)
