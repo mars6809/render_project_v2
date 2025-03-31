@@ -16,6 +16,10 @@ scheduler.add_job(run_backtest, "interval", minutes=5)
 run_backtest()
 scheduler.start()
 
+# 啟動網站後立刻先執行一次回測
+run_backtest()
+scheduler.start()
+
 # 首頁（策略管理）
 @app.route("/", methods=['GET', 'POST'])
 def index():
