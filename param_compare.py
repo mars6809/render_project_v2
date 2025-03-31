@@ -1,6 +1,32 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+
+# 假設資本數據保存在 equity_curve 中
+def plot_equity_curve(equity_curve):
+    plt.figure(figsize=(10, 6))
+    plt.plot(equity_curve, label="Equity Curve", color="green")
+    plt.title("Capital Growth Over Time")
+    plt.xlabel("Time (Iterations)")
+    plt.ylabel("Capital")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig("equity_curve.png")  # 儲存圖片
+    plt.close()
+
+def plot_win_rate(win_rate_data):
+    plt.figure(figsize=(10, 6))
+    plt.bar(range(len(win_rate_data)), win_rate_data, color="blue")
+    plt.title("Win Rate Comparison")
+    plt.xlabel("Strategy")
+    plt.ylabel("Win Rate (%)")
+    plt.tight_layout()
+    plt.savefig("win_rate.png")  # 儲存圖片
+    plt.close()
+
+# 在回測結束後，這些圖表會被生成並保存在當前目錄
+
 from ta.volatility import BollingerBands
 from ta.momentum import RSIIndicator
 
