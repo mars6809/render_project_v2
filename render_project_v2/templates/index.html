@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>參數回測績效看板</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+    <h1>📈 回測績效總覽</h1>
+    <p>每小時自動更新</p>
+    <h3>最佳策略組合</h3>
+    {{ table_best | safe }}
+    <hr>
+    <h3>所有回測參數組</h3>
+    {{ table_all | safe }}
+    <hr>
+    <img src="/static/final_capital_bar.png" class="img-fluid mb-2">
+    <img src="/static/win_rate_bar.png" class="img-fluid mb-2">
+    <img src="/static/avg_return_bar.png" class="img-fluid mb-2">
+</body>
+</html>
