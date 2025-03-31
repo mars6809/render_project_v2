@@ -48,22 +48,22 @@ def login():
     return render_template("login.html")
 
 # 主頁面（策略展示）
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def index():
     if 'user' not in session:
         return redirect(url_for('login'))
 
+    # 載入策略與數據
     strategies = load_strategies()
     current_strategy = strategies.get('current_strategy', '未選擇')
 
-    if request.method == 'POST':
-        strategy_name = request.form.get("strategy_name")
-        strategies['current_strategy'] = strategy_name
-        with open('strategies.json', 'w') as f:
-            json.dump(strategies, f, indent=4)
-        return redirect('/')
+    # 加載回測結果圖表
+    equity_curve_image = "equity_curve.png"  # 假設這是資本變化圖
+    win_rate_image = "win_rate.png"  # 假設這是勝率柱狀圖
 
-    return render_template("index.html", strategies=strategies, current_strategy=current_strategy)
+    return render_template("index.html", strategies=strategies, current_strategy=current_strategy,
+                           equity_curve_image=equity_curve_image, win_rate_image=win_rate_image)
+
 
 # 後台管理頁面（用戶管理）
 @app.route("/admin", methods=['GET', 'POST'])
