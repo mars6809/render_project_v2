@@ -1,0 +1,25 @@
+{
+    "user_defined": [
+        {
+            "name": "我的RSI保守策略",
+            "rsi_entry": 30,
+            "rsi_exit": 50,
+            "bb_std": 2,
+            "tp": 0.02,
+            "sl": -0.015,
+            "win_rate": 57.3
+        }
+    ],
+    "ai_generated": [
+        {
+            "name": "AI自動最佳策略",
+            "rsi_entry": 28,
+            "rsi_exit": 55,
+            "bb_std": 2.1,
+            "tp": 0.025,
+            "sl": -0.012,
+            "win_rate": 63.1
+        }
+    ],
+    "current_strategy": "AI自動最佳策略"
+}
