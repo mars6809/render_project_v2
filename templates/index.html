@@ -21,10 +21,6 @@
         .btn-primary:hover {
             background-color: #0b8c6b;
         }
-        select {
-            background-color: #343541;
-            color: #ececf1;
-        }
     </style>
 </head>
 <body class="container py-4">
@@ -33,6 +29,7 @@
         <p class="lead">AI 自動調參 × 自訂策略選擇</p>
     </div>
 
+    <!-- 策略選擇區域 -->
     <div class="card p-4 mb-4">
         <h4>⚙️ 目前啟用策略：{{ current_strategy }}</h4>
         <form method="POST">
@@ -56,13 +53,24 @@
         </form>
     </div>
 
+    <!-- 顯示圖表 -->
     <div class="card p-4 mb-4">
-        <h4>🏅 AI 自動最佳策略</h4>
-        {{ table_best | safe }}
+        <h4>📊 回測結果圖表</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <h5>資本變化曲線</h5>
+                <img src="{{ url_for('static', filename=equity_curve_image) }}" alt="Equity Curve" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h5>勝率柱狀圖</h5>
+                <img src="{{ url_for('static', filename=win_rate_image) }}" alt="Win Rate" class="img-fluid">
+            </div>
+        </div>
     </div>
 
+    <!-- 顯示回測數據 -->
     <div class="card p-4">
-        <h4>📊 所有回測參數組</h4>
+        <h4>📋 所有回測參數組</h4>
         {{ table_all | safe }}
     </div>
 </body>
