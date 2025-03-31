@@ -15,6 +15,10 @@ def run_backtest():
 # 排程器，每5分鐘自動執行一次回測
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=run_backtest, trigger="interval", minutes=5)
+
+# 立刻先執行一次回測
+run_backtest()
+
 scheduler.start()
 
 @app.route("/")
